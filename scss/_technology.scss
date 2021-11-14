@@ -1,0 +1,99 @@
+/*-------------*/
+/* Technology */
+/*-----------*/
+
+.technology {
+  background-image: url(../assets/technology/background-technology-mobile.jpg);
+
+  @include breakpoint-up(sm) {
+    background-position: center center;
+    background-image: url(../assets/technology/background-technology-tablet.jpg);
+  }
+
+  @include breakpoint-up(lg) {
+    background-image: url(../assets/technology/background-technology-desktop.jpg);
+  }
+}
+
+.grid-container--technology {
+  --flow-space: 2rem;
+  padding-inline: 0;
+  grid-template-areas:
+    "title"
+    "image"
+    "tabs"
+    "content";
+
+  > .numbered-title {
+    grid-area: title;
+    padding-inline: 1rem;
+
+    @include breakpoint-up(sm) {
+      justify-self: start;
+      margin-top: 1.2rem;
+      padding-inline: 3.41rem;
+    }
+
+    @include breakpoint-up(lg) {
+      padding-inline: 0rem;
+    }
+  }
+
+  > picture {
+    grid-area: image;
+    width: minmax(0, 62rem);
+    height: auto;
+
+    .img-landscape {
+      width: 62rem;
+      height: auto;
+    }
+
+    .img-portrait {
+      display: none;
+    }
+  }
+
+  .num-indicators {
+    grid-area: tabs;
+    padding-inline: 1rem;
+
+    @include breakpoint-up(lg) {
+      flex-direction: column;
+    }
+  }
+
+  .technology-details {
+    grid-area: content;
+    padding-inline: 1rem;
+  }
+
+  @include breakpoint-up(lg) {
+    justify-items: start;
+    column-gap: 0;
+    grid-template-columns:
+      minmax(0, 0.2fr)
+      minmax(0, 0.7fr)
+      minmax(0, 3fr)
+      minmax(0, 1fr)
+      minmax(1rem, 1fr);
+    grid-template-areas:
+      ". title title title ."
+      ". tabs content image image"
+      ". tabs content image image";
+
+    & > picture {
+      // grid-column: span 2;
+      justify-self: end;
+
+      .img-landscape {
+        display: none;
+      }
+
+      .img-portrait {
+        display: initial;
+        width: 62rem;
+      }
+    }
+  }
+}

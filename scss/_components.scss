@@ -1,0 +1,237 @@
+/*-------------*/
+/* Components */
+/*-----------*/
+
+.large-button {
+  font-size: 2rem;
+  position: relative;
+  display: inline-grid;
+  z-index: 1;
+  place-items: center;
+  padding: 0 2em;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  text-decoration: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-color: hsl(var(--clr-white) / 0.15);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 500ms linear, transform 750ms ease-in-out;
+  }
+
+  &:hover::after,
+  &:focus::after {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+.mobile-nav-toggle {
+  display: none;
+
+  @include breakpoint-down(sm) {
+    display: block;
+    position: absolute;
+    z-index: 11;
+    right: 1rem;
+    top: 2rem;
+    background: transparent;
+    background-image: url(../assets/shared/icon-hamburger.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 1.5rem;
+    aspect-ratio: 1;
+    border: 0;
+
+    &[aria-expanded="true"] {
+      background-image: url(../assets/shared/icon-close.svg);
+    }
+
+    &:focus-visible {
+      outline: 5px solid white;
+      outline-offset: 5px;
+    }
+  }
+}
+
+/* primary-header */
+
+.logo {
+  margin: 1.5rem clamp(1.5rem, 5vw, 3.5rem);
+}
+
+.primary-header {
+  justify-content: space-between;
+  align-items: center;
+
+  @include breakpoint-up(lg) {
+    &::after {
+      content: "";
+      display: block;
+      position: relative;
+      height: 1px;
+      width: 100%;
+      margin-right: -2.5rem;
+      background: hsl(var(--clr-white) / 0.25);
+      order: 1;
+    }
+
+    nav {
+      order: 2;
+    }
+
+    .primary-navigation {
+      margin-block: 2rem;
+    }
+  }
+}
+
+.primary-navigation {
+  --gap: clamp(1.5rem, 5vw, 3.5rem);
+  --underline-gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: hsl(var(--clr-dark) / 0.95);
+  //backdrop-filter: blur(1.5rem);
+
+  a {
+    text-decoration: none;
+  }
+
+  a > span {
+    font-weight: 700;
+    margin-right: 0.5em;
+  }
+
+  &[data-visible="true"] {
+    transform: translateX(0);
+  }
+
+  @supports (backdrop-filter: blur(1rem)) {
+    background: hsl(var(--clr-white) / 0.05);
+    backdrop-filter: blur(1.5rem);
+  }
+
+  @include breakpoint-down(sm) {
+    --underline-gap: 0.5rem;
+    position: fixed;
+    z-index: 10;
+    inset: 0 0 0 20%;
+    list-style: none;
+    padding: min(20rem, 15vh) 2rem;
+    margin: 0;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 500ms ease-in-out;
+  }
+
+  @include breakpoint-between(sm, lg) {
+    a > span {
+      display: none;
+    }
+  }
+
+  @include breakpoint-up(lg) {
+    margin-block: 2rem;
+  }
+
+  @include breakpoint-up(sm) {
+    padding-inline: clamp(3rem, 7vw, 7rem);
+  }
+}
+
+.underline-indicators {
+  & > * {
+    cursor: pointer;
+    padding: var(--underline-gap, 0.5rem) 0;
+    border: 0;
+    border-bottom: 0.25rem solid hsl(var(--clr-white) / 0);
+    background-color: transparent;
+
+    &:hover,
+    &:focus {
+      border-color: hsl(var(--clr-white) / 0.5);
+    }
+
+    @include breakpoint-down(sm) {
+      border: 0;
+      border-right: 0.25rem solid hsl(var(--clr-white) / 0);
+    }
+  }
+
+  & > .active,
+  & > [aria-selected="true"] {
+    color: hsl(var(--clr-white) / 1);
+    border-color: hsl(var(--clr-white) / 1);
+  }
+
+  @include breakpoint-down(sm) {
+    padding-right: 0;
+  }
+}
+
+.tab-list {
+  --gap: 2rem;
+}
+
+.dot-indicators {
+  & > * {
+    cursor: pointer;
+    border: 0;
+    border-radius: 50%;
+    padding: 0.5em;
+    aspect-ratio: 1;
+    background-color: hsl(var(--clr-white) / 0.25);
+
+    &:hover,
+    &:focus {
+      background-color: hsl(var(--clr-white) / 0.5);
+    }
+  }
+
+  & > [aria-selected="true"] {
+    background-color: hsl(var(--clr-white) / 1);
+  }
+}
+
+.num-indicators {
+  display: flex;
+
+  & > * {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: hsl(var(--clr-dark));
+    color: hsl(var(--clr-white));
+    border: 1px solid hsl(var(--clr-white) / 0.25);
+
+    &:hover,
+    &:focus {
+      border-color: hsl(var(--clr-white) / 0.5);
+    }
+
+    @include breakpoint-up(sm) {
+      width: 60px;
+      height: 60px;
+    }
+
+    @include breakpoint-up(lg) {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  & > [aria-selected="true"] {
+    color: hsl(var(--clr-dark));
+    background-color: hsl(var(--clr-white) / 1);
+    border-color: hsl(var(--clr-white) / 1);
+  }
+}

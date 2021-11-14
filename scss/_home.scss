@@ -1,0 +1,38 @@
+/*-------*/
+/* Home */
+/*-----*/
+
+body {
+  background-size: cover;
+  background-position: bottom center;
+}
+
+.home {
+  background-image: url(../assets/home/background-home-mobile.jpg);
+
+  @include breakpoint-up(sm) {
+    background-position: center center;
+    background-image: url(../assets/home/background-home-tablet.jpg);
+  }
+
+  @include breakpoint-up(lg) {
+    background-image: url(../assets/home/background-home-desktop.jpg);
+  }
+}
+
+.grid-container {
+  @include breakpoint-up(lg) {
+    &--home {
+      padding-bottom: max(6rem, 20vh);
+      align-items: end;
+    }
+
+    &--home > *:first-child {
+      grid-column: 2;
+    }
+
+    &--home > *:last-child {
+      grid-column: 3;
+    }
+  }
+}
